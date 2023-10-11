@@ -1,4 +1,6 @@
-create database aula_6; -- COMANDOS AVANÇADOS
+-- COMANDOS AVANÇADOS
+/* tabela heap, view, função, trigger, procedure*/
+create database aula_6; 
 use aula_6;
 
 										-- ***** TABELA HEAP *****

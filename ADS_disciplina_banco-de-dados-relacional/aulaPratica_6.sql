@@ -1,4 +1,5 @@
-/* stored procedure e cursor */
+-- COMANDOS AVANÇADOS
+/* função, stored procedure e cursor */
 create database aulapratica_6;
 
 use aulapratica_6;
@@ -70,8 +71,8 @@ select nome, salario, reajuste(salario, 10) from funcionario; -- a função faz 
 -- pode ter paramentros de entrada ou não.
 
 -- Exemplo de procedure
--- ESSA PROCEDURE FAZ O INSERT DO FUNCIONARIO NA TABELA, o dev chama a procedure e passa as...
--- informações através de uma linguagem de programação.
+-- ESSA PROCEDURE FAZ O INSERT DO FUNCIONARIO NA TABELA, o dev chama a procedure 
+-- e passa as informações através de uma linguagem de programação.
 
 delimiter $$
 create procedure incluiFuncionario(
@@ -114,8 +115,8 @@ show function status where db = 'aulapratica_5';
 select * from funcionario;
 
 											-- ***** CURSOR *****
--- usado para manipular o resultado de um select, permite navegar no resultado de um select...
--- manipulando cada linha do select para encontrar uma informação. O cursor é usado dentro de uma procedure
+-- usado para manipular o resultado de um select, permite navegar no resultado de um select
+-- manipulando cada linha do select para encontrar uma informação. O cursor é usado dentro de uma procedure.
 use aulapratica_5;
 
 -- Tabela para armazenar a simulação do reajuste de salário
@@ -128,7 +129,7 @@ create table simulacao (
 select * from simulacao;
 
 -- drop table simulacao;
-drop procedure simulaReajuste;
+-- drop procedure simulaReajuste;
 
 delimiter $$
 create procedure simulaReajuste()
@@ -139,7 +140,7 @@ declare vsalario decimal(10,2);
 declare vnovoSalario decimal(10,2);
 declare vdepartamento int;
     
-declare cursorFuncionario cursor -- declaração do cursor q armazena o select, o cursor fica armazenado na memória da máquina.
+declare cursorFuncionario cursor -- declaração do cursor que armazena o select, o cursor fica armazenado na memória da máquina.
 for select nome, departamento, salario -- então um cursor com um select mt grande afeta o desempenho.
 	from funcionario;
 	

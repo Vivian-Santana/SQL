@@ -103,7 +103,9 @@ select sum(salario) from funcionario; -- soma o sala´rio dos funcionarios.
 select sum(salario) from funcionario
 where departamento = 1;
 
--- ESTÁ TRAZENDO A INFORMAÇÃ ERRADA!!!
+use aulaPratica_4; -- o código de construção desse db está na query aulaPratica_4
+
+-- ESTÁ TRAZENDO A INFORMAÇÃO ERRADA!!!
 select min(salario), max(salario) from funcionario; -- min traz o menor salario e max traz o maior.
 select min(salario), nome from funcionario; -- em mts SGBDs isso não dá certo mas pode ser feito com uma sub consulta como o exempolo a baixo
 select max(salario), nome from funcionario;
@@ -116,8 +118,8 @@ where salario = (select min(salario) from funcionario);
 select salario, nome from funcionario
 order by salario;
 
--- consultaa de nasc com max e min
--- ESTÁ TRAZENDO A INFORMAÇÃ ERRADA!!!
+-- consulta de nasc com max e min
+-- ESTÁ TRAZENDO A INFORMAÇÃO ERRADA!!!
 select max(nascimento), nome from funcionario; -- funcionario + novo
 select min(nascimento), nome from funcionario; -- funcionario + velho
 
@@ -144,11 +146,3 @@ select departamento, sum(salario) as 'soma dos salarios' from funcionario -- som
 group by departamento
 having sum(salario) > 20000 -- filtra os departamentos que somando tds os salarios o resultado é acima de 20000 
 order by 2 desc; -- ordena por departamento em ordem decrescente
-
-
-
-
-
-
-
-

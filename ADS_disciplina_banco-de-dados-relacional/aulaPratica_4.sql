@@ -184,7 +184,7 @@ select nome,
     end as 'Gênero'
 from funcionario;
 
--- ALIAS , colocar apelido nas colunas , alterando o nome das colunas na consulta.
+-- AS , colocar apelido nas colunas , alterando o nome das colunas na consulta.
 select nome 'Nome do Funcionário',
 salario as 'Salário atual',
 salario * 1.10 as 'Novo salário' -- fazendo um reajuste 
