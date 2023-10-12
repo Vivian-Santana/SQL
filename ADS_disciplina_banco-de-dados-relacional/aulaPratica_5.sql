@@ -137,8 +137,12 @@ select curdate(), day(curdate()), dayname(curdate()), dayofweek(curdate()), dayo
 select month(curdate()), monthname(curdate()), year(curdate()); -- mostra num do mes, nome do mes e num do ano.
 select curdate(), now(), week(curdate()), weekday(now()), weekday(curdate()); -- now da data, hora min e segundo.
 select curdate(), adddate(curdate(), interval 31 day), adddate(curdate(), interval 1 month); -- conta um intervalo de 31 dias.
--- A função DATEDIFF é usada para calcular a diferença entre duas datas. Ela retorna o número de intervalos (dias, semanas, meses, etc.) entre duas datas especificadas. 
--- DATEDIFF sintaxe (intervalo, data_inicial, data_final)
+
+/* A função DATEDIFF é usada para calcular a diferença entre duas datas. 
+Ela retorna o número de intervalos (dias, semanas, meses, etc.) entre 
+duas datas especificadas. 
+DATEDIFF sintaxe (intervalo, data_inicial, data_final) */
+
 select curdate(), datediff('2022-01-01', curdate()), datediff(curdate(), '2022-01-01'); 
 select curdate(), date_format(curdate(), '%w %m %y'), date_format('2022-01-01 20:15:00', '%h:%i:%s');
 

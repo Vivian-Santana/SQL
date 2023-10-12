@@ -131,7 +131,7 @@ delete from cliente where cidadeId in
 truncate table cliente; -- esvazia a tabela toda
 
 -- Filtro
--- é boas ráticas o select sempre ter um filtro
+-- é boas práticas o select sempre ter um filtro
 select * from cliente where genero = 'F';
 
 -- em ambiente corporativo evitamos o *  fazendo select apenas nas colunas necessárias:

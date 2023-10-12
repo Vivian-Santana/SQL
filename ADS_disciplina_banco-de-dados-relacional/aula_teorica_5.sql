@@ -87,7 +87,7 @@ monthname('2023-10-20'); -- nome do mes
 -- SELEÇÃO DE HORA E DATA E CALCULO COM DATA E HORA
 select current_time();
 select hour('12:00:10'); -- separa a hora
-select minute('12:00:10'); -- ssepara o minuto
+select minute('12:00:10'); -- separa o minuto
 
 select adddate('2023-10-20', interval 30 day); -- adiciona,soma 30 dias a partir da data colocada no parâmetro.
 -- dá pra escrever tbm como 1 mês, só substituir interval 30 day por 1 month.
@@ -107,7 +107,7 @@ use aulaPratica_4; -- o código de construção desse db está na query aulaPrat
 
 -- ESTÁ TRAZENDO A INFORMAÇÃO ERRADA!!!
 select min(salario), max(salario) from funcionario; -- min traz o menor salario e max traz o maior.
-select min(salario), nome from funcionario; -- em mts SGBDs isso não dá certo mas pode ser feito com uma sub consulta como o exempolo a baixo
+select min(salario), nome from funcionario; -- em mts SGBDs isso não dá certo mas pode ser feito com uma sub consulta como o exemplo a baixo
 select max(salario), nome from funcionario;
 
 -- sub consulta de quem recebe o menor salário
