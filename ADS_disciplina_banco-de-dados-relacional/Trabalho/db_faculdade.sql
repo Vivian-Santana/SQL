@@ -1,14 +1,58 @@
--- inserção dos dados
+-- Implementação
+create database faculdade;
 use faculdade;
 
-select * from aluno;
-select * from disciplina;
-select * from curso;
-select * from historico;
-select * from alunocurso;
-select * from grade;
-select * from gradedisciplina;
+create table Aluno (
+idAluno int not null unique,
+matricula varchar(10) not null unique,
+nome varchar(50) not null,
+primary key(idAluno) 
+);
 
+create table Curso (
+idCurso int not null unique,
+nome varchar(50) not null,
+primary key(idCurso) 
+);
+
+create table Disciplina (
+idDisciplina int not null unique,
+nome varchar(50) not null,
+cargaHoraria int not null,
+primary key(idDisciplina) 
+);
+
+-- Entidade associativa
+create table AlunoCurso (
+anoEntrada int not null,
+idAluno int not null, foreign key (idAluno) references Aluno (idAluno),
+idCurso int not null, foreign key (idCurso) references Curso (idCurso)
+);
+
+-- Entidade associativa
+create table Historico (
+nota float not null,
+dataHistorico date not null,
+idAluno int not null, foreign key (idAluno) references Aluno (idAluno),
+idDisciplina int not null, foreign key (idDisciplina) references Disciplina (idDisciplina)
+);
+
+create table Grade (
+idGrade int not null unique,
+ano int not null,
+cargaHorariaTotal int not null,
+primary key(idGrade),
+idCurso int not null, foreign key (idCurso) references Curso (idCurso)
+);
+
+-- Entidade associativa
+create table GradeDisciplina (
+idGrade int not null, foreign key (idGrade) references Grade (idGrade),
+idDisciplina int not null, foreign key (idDisciplina) references Disciplina (idDisciplina)
+);
+
+-- inserção dos dados
+use faculdade;
 
 insert into Aluno (idAluno, matricula, nome) values
 	( 1, 'ADS001', 'Alice de Souza'),
@@ -47,7 +91,7 @@ insert into Disciplina (idDisciplina, nome, cargaHoraria) values
 	(13, 'Programação Orientada a Objetos', 80),
 	(14, 'Sistema Gerenciador de Banco de Dados', 60),
 	(15, 'Sistemas Operacionais', 60);
-                            
+				
 insert into Curso (idCurso, nome) values
 	(1, 'Análise e Desenvolvimento de Sistemas'),
 	(2, 'Banco de Dados'),
@@ -121,3 +165,44 @@ insert into GradeDisciplina (idGrade, idDisciplina) values
 	(10, 1), (10, 2), (10, 3), (10, 4), (10, 5), (10, 6), (10, 7), (10, 8), (10, 9), (10, 10), (10, 11), (10, 12), (10, 13), (10, 14), (10, 15),
 	(11, 1), (11, 2), (11, 3), (11, 4), (11, 5), (11, 6), (11, 7), (11, 8), (11, 9), (11, 10), (11, 11), (11, 12), (11, 13), (11, 14), (11, 15),
 	(12, 1), (12, 2), (12, 3), (12, 4), (12, 5), (12, 6), (12, 7), (12, 8), (12, 9), (12, 10), (12, 11), (12, 12), (12, 13), (12, 14), (12, 15);
+    
+select * from aluno;
+select * from disciplina;
+select * from curso;
+select * from historico;
+select * from alunocurso;
+select * from grade;
+select * from gradedisciplina;
+
+-- Consultas
+
+-- 2.	Implemente uma consulta para listar o quantitativo de cursos existentes.
+select count(idCurso) from Curso; 
+
+-- 3.	Implemente uma consulta para listar o nome das disciplinas existentes.
+select nome from disciplina;
+
+/*4.	Implemente uma consulta para listar o nome de todos os cursos e o nome de seus respectivos alunos. 
+        A listagem deve ser mostrada em ordem decrescente pelo nome dos cursos.*/
+
+select c.nome as NomeDoCurso, a.nome as NomeDoAluno
+from Curso c
+inner join AlunoCurso ac on c.idCurso = ac.idCurso
+inner join Aluno a on ac.idAluno = a.idAluno
+order by c.nome desc;
+
+/* 5. Implemente uma consulta para listar o nome das disciplinas e a média das notas
+das disciplinas em todos os cursos. Para isso, utilize o comando group by.*/
+
+select d.nome as NomeDaDisciplina, avg(h.nota) as MediaDasNotas
+from Disciplina d
+left join Historico h on d.idDisciplina = h.idDisciplina
+group by d.idDisciplina;
+
+/* 6. Implemente uma consulta para listar o nome de todos os cursos e a quantidade de
+alunos em cada curso. Para isso, utilize os comandos join e group by.*/
+
+select c.nome as NomeDoCurso, count(ac.idAluno) as QuantidadeDeAlunos
+from Curso c
+inner join AlunoCurso ac on c.idCurso = ac.idCurso
+group by c.idCurso;
