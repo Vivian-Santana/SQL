@@ -1,0 +1,81 @@
+--DECLARE @LIMITE_MINIMO INT;
+--DECLARE @LIMITE_MAXIMO INT;
+
+--SET @LIMITE_MINIMO = 3;
+--SET @LIMITE_MAXIMO = 30;
+
+--PRINT 'Entrei no loop';
+--WHILE @LIMITE_MINIMO <= @LIMITE_MAXIMO
+--	BEGIN
+--		PRINT @LIMITE_MINIMO;
+--		SET @LIMITE_MINIMO = @LIMITE_MINIMO + 1;
+--	END;
+--PRINT 'Saí do loop';
+--------------------------------------------------------
+DECLARE @LIMITE_MINIMO INT;
+DECLARE @LIMITE_MAXIMO INT;
+DECLARE @NUM_LINHAS_MAX INT;
+DECLARE @NUM_LINHAS_ESCRITAS INT;
+
+
+SET @LIMITE_MINIMO = 3;
+SET @LIMITE_MAXIMO = 30;
+SET @NUM_LINHAS_MAX = 10;
+SET @NUM_LINHAS_ESCRITAS = 0;
+
+PRINT 'Entrei no loop';
+WHILE @LIMITE_MINIMO <= @LIMITE_MAXIMO --enquanto limite min for menor ou = a limite max incrementa linhas
+	BEGIN
+		SET  @NUM_LINHAS_ESCRITAS = @NUM_LINHAS_ESCRITAS +1 --INCREMENTO
+		IF @NUM_LINHAS_ESCRITAS = @NUM_LINHAS_MAX --se cair nessa condição sai do laço
+		BEGIN
+			PRINT 'Saí do loop POR CAUSA DO BREAK';
+			BREAK;
+		END;
+		PRINT @LIMITE_MINIMO;
+		SET @LIMITE_MINIMO = @LIMITE_MINIMO + 1;
+	END;
+PRINT 'Saí do loop';
+
+--------------------------------------------------------
+/*Como podemos fazer um script que, a partir do dia 01/01/2017, 
+conte o número de notas fiscais até o dia 10/01/2017 e, além disso, 
+imprima a data e o número de notas fiscais?*/
+
+DECLARE @DATA_INICIAL DATE;
+DECLARE @DATA_FINAL DATE;
+DECLARE @NUM_NOTAS INT;
+
+SET @DATA_INICIAL = '2017-01-01';
+SET @DATA_FINAL = '2017-01-10';
+
+WHILE @DATA_INICIAL <= @DATA_FINAL
+BEGIN 
+	SELECT @NUM_NOTAS = COUNT(*)FROM[NOTAS FISCAIS]
+		WHERE DATA = @DATA_INICIAL
+    PRINT CONVERT(VARCHAR(10), @DATA_INICIAL) + ' --> ' 
+        + CONVERT(VARCHAR(10), @NUM_NOTAS) 
+    SELECT @DATA_INICIAL = DATEADD(DAY, 1, @DATA_INICIAL) --A função "DATEADD" retorna a data armazenada em @DATA_INICIAL, incrementada em 1 dia.
+END
+-------------------------------------------------------------------------------
+-- Inclusão de dia e o número de notas em uma tabela.
+IF OBJECT_ID('TABELANOTAS','U') IS NOT NULL
+DROP TABLE TABELANOTAS
+CREATE TABLE TABELANOTAS (DATA DATE, NUMNOTAS INT)
+
+DECLARE @DATAINICIAL DATE
+DECLARE @DATAFINAL DATE
+DECLARE @NUMNOTAS INT
+
+SET @DATAINICIAL = '20170101'
+SET @DATAFINAL = '20170110'
+
+WHILE @DATAINICIAL <= @DATAFINAL
+BEGIN
+    SELECT @NUMNOTAS = COUNT(*) FROM [NOTAS FISCAIS] 
+        WHERE DATA = @DATAINICIAL
+    INSERT INTO TABELANOTAS (DATA, NUMNOTAS) 
+        VALUES (@DATAINICIAL, @NUMNOTAS)
+    SELECT @DATAINICIAL = DATEADD(DAY, 1, @DATAINICIAL)
+END
+SELECT * FROM TABELANOTAS
