@@ -16,4 +16,4 @@ SELECT * FROM #X_MAN;
 
 SELECT * FROM ##AVENGERS;
 
-INSERT INTO ##AVENGERS VALUES ('3','Natasha Romanoff');
+INSERT INTO ##AVENGERS VALUES ('3','Natasha Romanoff'); -- consigo inserir valores tbm fora da conexão
