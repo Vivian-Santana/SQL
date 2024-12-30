@@ -4,12 +4,13 @@ FROM [TABELA DE CLIENTES]
 WHERE CIDADE = 'Rio de Janeiro'
 ORDER BY BAIRRO
 
+-- traz o terceiro bairro da lista de bairros da tb de clientes contando a partir do índice 0
 SELECT BAIRRO
 FROM [TABELA DE CLIENTES]
 WHERE CIDADE = 'Rio de Janeiro'
 ORDER BY BAIRRO
 OFFSET 3 ROWS
-FETCH NEXT 1 ROWS ONLY;
+FETCH NEXT 3 ROWS ONLY; -- apenas uma linha, se mudar para 2 traz o bairro no indice 3 e 4
 
 select * from [TABELA DE CLIENTES]
 
