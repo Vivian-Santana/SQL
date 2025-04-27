@@ -47,12 +47,12 @@ SELECT NOME, IDADE FROM TABELA_DE_CLIENTES
 WHERE IDADE <> 18
 
 -- **************** datas  formato YYYY-MM-DD ****************
--- filtrando clientes por data de nasciemento  a partir da data passada
+-- filtrando clientes por data de nascimento  a partir da data passada
 SELECT NOME, DATA_DE_NASCIMENTO FROM TABELA_DE_CLIENTES 
 WHERE DATA_DE_NASCIMENTO >= '1995-11-14'
 ORDER BY DATA_DE_NASCIMENTO ASC; -- ordenando de forma crescente
 
--- filtrando clientes por data de nasciemento anterior a data passada
+-- filtrando clientes por data de nascimento anterior a data passada
 SELECT NOME, DATA_DE_NASCIMENTO FROM TABELA_DE_CLIENTES 
 WHERE DATA_DE_NASCIMENTO < '1995-11-14'
 ORDER BY DATA_DE_NASCIMENTO DESC; -- ordenando de forma decrescente
@@ -70,4 +70,4 @@ ORDER BY BAIRRO ASC;
 -- filtra pelos que moram na lapa
 SELECT NOME, BAIRRO FROM TABELA_DE_CLIENTES 
 WHERE BAIRRO = 'Lapa'
-ORDER BY BAIRRO ASC;
+ORDER BY NOME ASC;
