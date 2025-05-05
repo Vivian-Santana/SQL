@@ -28,7 +28,8 @@ WHERE PRECO_DE_LISTA >= 10
 GROUP BY EMBALAGEM;
 
 -- PREÇO DE SUCOS ACIMA DE 20R$
-SELECT EMBALAGEM, MAX (PRECO_DE_LISTA) AS PRECO_MAX, 
+-- para cada tipo de embalagem em que haja ao menos um produto ≥ 10, apenas aqueles cujos preços máximos alcançam 20 ou mais.
+SELECT EMBALAGEM, MAX(PRECO_DE_LISTA) AS PRECO_MAX, 
 				  MIN(PRECO_DE_LISTA) AS PRECO_MIN
 FROM TABELA_DE_PRODUTOS
 WHERE PRECO_DE_LISTA >= 10
